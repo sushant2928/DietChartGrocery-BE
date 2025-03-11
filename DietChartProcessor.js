@@ -5,21 +5,11 @@ dotenv.config();
 
 class DietChartProcessor {
     constructor() {
-        if (!process.env.HF_API_KEY) {
-            throw new Error('HF_API_KEY is not set in environment variables');
-        }
         this.apiKey = process.env.GEMINI_API_KEY;
         this.genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
         this.model = this.genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-        // this.openai = new OpenAI({
-        //     baseURL: 'https://api.deepseek.com',
-        //     apiKey: process.env.GEMINI_API_KEY
-        // });
     }
 
-    async sleep(ms) {
-        return new Promise(resolve => setTimeout(resolve, ms));
-    }
     async extractMeals(dietText, maxRetries = 5) {
 
 
